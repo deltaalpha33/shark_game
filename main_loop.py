@@ -2,13 +2,12 @@ import sys, pygame
 
 class Entity():
 	
-	def __init__(self, xCord, yCord, texturePath, collisionRadius):
+	def __init__(self, xCord, yCord, collisionRadius):
 		self.xCord = xCord
 		self.yCord = yCord
-		self.texturePath = texturePath
 		self.collisionRadius = collisionRadius
 
-		imSurface = pygame.image.load(texturePath)
+		
 
 	def hit(self, gameState):
 		pass
@@ -21,13 +20,14 @@ class Entity():
 
 class Fish(Entity):
 	def __init__(self, xCord, yCord, collisionRadius):
-		super().__init__(xCord, yCord, "fish.jpg", collisionRadius)
+		super().__init__(xCord, yCord, collisionRadius)
+		self.imSurface = pygame.image.load("fish.jpg")
 
 	def hit(self, gameState):
 		gameState.score += 1
 
 	def display(self, screen):
-		screen.blit(super().imSurface, self.xCord, self.yCord)
+		screen.blit(self.imSurface, self.xCord, self.yCord)
 
 class Checkpoint():
 	def __init__(self, textToDisplay):
