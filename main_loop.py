@@ -27,7 +27,7 @@ class Fish(Entity):
 		gameState.score += 1
 
 	def display(self, screen):
-		screen.blit(self.imSurface, self.xCord, self.yCord)
+		blt(screen, self.imSurface, self.xCord, self.yCord)
 
 class Checkpoint():
 	def __init__(self, textToDisplay):
