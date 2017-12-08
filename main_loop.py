@@ -8,6 +8,8 @@ class Entity():
 		self.texturePath = texturePath
 		self.collisionRadius = collisionRadius
 
+		imSurface = pygame.image.load(texturePath)
+
 	def hit(self, gameState):
 		pass
 
@@ -18,14 +20,14 @@ class Entity():
 		pass
 
 class Fish(Entity):
-	def __init__(self, xCord, yCord, texturePath, collisionRadius):
-		super().__init__(xCord, yCord, texturePath, collisionRadius)
+	def __init__(self, xCord, yCord, collisionRadius):
+		super().__init__(xCord, yCord, "fish.jpg", collisionRadius)
 
 	def hit(self, gameState):
 		gameState.score += 1
 
-	def display(self):
-		pass
+	def display(self, screen):
+		screen.blit(super().imSurface, self.xCord, self.yCord)
 
 class Checkpoint():
 	def __init__(self, textToDisplay):
@@ -71,11 +73,12 @@ class GameState():
 		print("shark pos" + str(self.sharkPos))
 
 	def drawState(self):
-		pass
+		for e in self.entityList:
+			e.display(pygame.display.get_surface())
 
 	def addNewEntities(self, n=1):
 		for x in range(n):
-			e = Fish(10, 10, "" , 1)
+			e = Fish(10, 10 , 1)
 			self.entityList.append(e)
 
 	def moveEntities(self):
